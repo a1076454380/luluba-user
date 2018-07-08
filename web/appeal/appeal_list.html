@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>投诉列表-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+</head>
+<body class="list_body">
+	<div id="app">
+		<!--头部-->
+		<header class="header">
+		    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back()"></a>
+		    <h5>投诉列表</h5>
+		</header>
+		
+		<section class="appeal appeal_list">
+		    <div class="appeal_progess box-size" v-for="val in list" @click="openDatail(val.orderId)">
+		        <a href="appeal_progess.html" class="icon iconfont icon-arrow-right">
+		            订单编号：{{val.orderId}}
+		            <span v-show="val.complianStatus==0">解决中</span>
+		             <span v-show="val.complianStatus==1">已解决</span>
+		        </a>
+		    </div>		
+		</section>
+	</div>
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+<script type="text/javascript">
+	var myvue=new Vue({
+		el:'#app',
+		data:{
+			list:[]
+		},
+		methods:{
+			openDatail:function(complaintId){
+				localStorage.setItem('complaintId',complaintId)
+				window.location.href='appeal_progess.html'
+			},
+			back:function(){
+				mui.openWindow({
+					url:'../../index.html',
+					id:'index'
+				})
+			}
+		},
+		mounted:function(){
+			var that=this
+			$.ajax({
+				type:"post",
+				url:localStorage.getItem('myurl')+"/queryComplaintByUserId",
+				async:true,
+				dataType:'json',
+				data:{
+					userId:localStorage.getItem('userid')
+				},	
+				success:function(res){
+					that.list=res.data
+					console.log(localStorage.getItem('userid'))
+				}
+			});
+		}
+	})
+</script>
+</body>
+</html>

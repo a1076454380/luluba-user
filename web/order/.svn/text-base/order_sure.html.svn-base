@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="XXX">
+		<meta name="keywords" content="XXX">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content=" black " />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="applicable-device" content="mobile">
+		<title>确认订单-陆陆捌货到家</title>
+		<link href="../../favicon.ico" rel="shortcut icon">
+		<link rel="stylesheet" href="../../css/m.debug.css">
+		<script src="../../js/flexible.js"></script>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body class="list_body">
+		<div id="app">
+			<!--头部-->
+			<header class="header">
+				<a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+				<h5>确认订单</h5>
+			</header>
+			<!--列表-->
+			<section class="order_sure">
+				<ul class="list_con box-size client">
+					<li>
+						<a href="add_require.html">
+							<p>额外需求</p>
+							<div>
+								<p>是否需要搬运、回单等服务</p>
+								<i class="icon iconfont icon-jiantou-copy1"></i>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;" class="book_yj">
+							<p>预计货物重量</p>
+							<input type="number" placeholder="请输入预计货物重量(单位:吨)" v-model="weight" @change="weightchange">
+						</a>
+					</li>
+					<li class="sure_list2">
+						<a href="javascript:void(0)">
+							<p>订单备注</p>
+						</a>
+						<textarea name="note" id="note" placeholder="请输入订单备注:一箱瓷砖,一箱水果,一个凳子,一台电冰箱,一杯咖啡...." v-model="note"></textarea>
+					</li>
+				</ul>
+			</section>
+			<section class="order_sure c_phone">
+				<div class="desc">若涉及高速费、停车费、搬运费，请用户额外支付</div>
+				<div class="desc">若涉及逾时等候费，请与司机按
+					<a href="../price/fee_scale.html">收费标准</a>收费。</div>
+				<div class="desc">
+					<input type="checkbox" name="goods" id="goods" checked>
+					<label for="goods">我已阅读并同意 <a href="ty_xy.html" class="xy">《货物运托服务协议》</a></label>
+				</div>
+			</section>
+
+			<div class="car_price box-size">
+				<div class="btn">
+					<a href="javascript:;" class="js_price">
+						优惠价¥
+						<input type="number" id="myprice" v-model="price"/>
+						<span class="changePrice" @click="changePrice">
+							修改价格
+						</span>
+					</a>
+				</div>
+				<div class="btn">
+					<a href="javascript:;" class="next" @click="topay">下一步</a>
+				</div>
+			</div>
+			<div class="payment_cover"></div>
+		</div>
+		<script type="text/javascript">
+			var myvue = new Vue({
+				el: '#app',
+				data: {
+					note: '',
+					weight: '',
+					myappointmentStatus: '',
+					price: 0,
+					mytime: ''
+				},
+				methods: {
+					changePrice:function(){
+						$('#myprice').focus()
+					},
+					topay: function() {
+						if($('#goods').is(':checked') && this.weight != ''&&this.note!='') {
+							var that = this
+							$.ajax({
+								type: "post",
+								url: localStorage.getItem('myurl') + "/createAliPay",
+								async: false,
+								dataType: 'json',
+								data: {
+									userId: localStorage.getItem('userid'),
+									orderStart: localStorage.getItem('startRoad') + '' + localStorage.getItem('startRoadD'),
+									orderEnd: localStorage.getItem('endRoad') + '' + localStorage.getItem('endRoadD'),
+									orderWeight: that.weight,
+									price: 0.01,
+									appointmentStatus: that.myappointmentStatus,
+									orderAddition: localStorage.getItem('orderAddition'),
+									orderRemark: that.note,
+									orderAppointment1: that.mytime,
+									driveCarType: localStorage.getItem('carType'),
+									userName: localStorage.getItem('qname'),
+									userPhone: localStorage.getItem('qphone'),
+									deliveryName: localStorage.getItem('zname'),
+									deliveryPhone: localStorage.getItem('zphone'),
+									carType: localStorage.getItem('carType'),
+									orderStatus: '0'
+								},
+								success: function(res) {
+									plus.payment.request(that.channel, res.data[0], function(result) {
+										plus.nativeUI.alert("支付成功！", function() {
+											window.location.href = '../order/orde_history.html'
+										});
+									}, function(error) {
+										$.ajax({
+											type: "post",
+											url: localStorage.getItem('myurl') + "/apiPayDeleteByorderId",
+											data: {
+												orderId: res.data[1]
+											},
+											async: true,
+											success: function(res) {
+												plus.nativeUI.alert("支付失败：" + error.code);
+											}
+										});
+
+									});
+								},
+								error: function(res) {
+									console.log(res)
+								}
+							});
+						} else {
+							alert('请检查订单重量和订单备注是否为空,或者您是否同意了服务协议!!')
+						}
+					},
+					weightchange: function() {
+						if(this.charge.weight < this.weight) {
+							var car = Math.ceil((this.weight - this.charge.weight) / this.charge.extralWeight)
+							this.price = this.returnFloat(this.price + car * this.charge.extralWeightPrice)
+						}else{
+							this.myajax()
+						}
+					},
+					returnFloat:function (value) {
+						var value = Math.round(parseFloat(value) * 100) / 100;
+						var xsd = value.toString().split(".");
+						if(xsd.length == 1) {
+							value = value.toString() + ".00";
+							return value;
+						}
+						if(xsd.length > 1) {
+							if(xsd[1].length < 2) {
+								value = value.toString() + "0";
+							}
+							return value;
+						}
+					},
+					myajax:function(){
+						var that=this
+						$.ajax({
+						type: "get",
+						url: localStorage.getItem('myurl') + "/queryAllByCarouselId",
+						async: true,
+						dataType: 'json',
+						data: {
+							carouselId: localStorage.getItem('carType')
+						},
+						success: function(res) {
+							that.charge = res.data
+							if(that.charge.kilometer > localStorage.getItem('alllength')) {
+								//									不超出公里数
+								that.price = that.charge.startPrice
+							} else {
+								//									超出公里数									
+								var car = Math.ceil((localStorage.getItem('alllength') - that.charge.kilometer) / that.charge.kilometer)
+								that.price = that.charge.startPrice + car * that.charge.perKilometerPrice
+							}
+								//								如果有返程
+							if(localStorage.getItem('orderAddition') != null) {
+								if(localStorage.getItem('orderAddition').indexOf('b') != '-1') {
+									that.price = Math.floor(that.price * 1.4)
+								}
+							}
+						}
+					});
+					}
+				},
+				mounted: function() {
+					this.myajax()
+					var that = this
+					// 1. 获取支付通道
+					function plusReady() {
+						// 获取支付通道
+						plus.payment.getChannels(function(channels) {
+							that.channel = channels[0];
+						}, function(e) {
+							alert("获取支付通道失败：" + e.message);
+						});
+					}
+					if(window.plus) {
+						plusReady();
+					} else {
+						document.addEventListener('plusready', plusReady, false);
+					}
+					//					不同意拼车
+					if(localStorage.getItem('appointmentStatus') == '0') {
+						if(localStorage.getItem('ytime') == '预约用车') {
+							//							不预约不拼车
+							this.myappointmentStatus = '5'
+							var date = new Date();
+							var seperator1 = "-";
+							var seperator2 = ":";
+							var month = date.getMonth() + 1;
+							var strDate = date.getDate();
+							if(month >= 1 && month <= 9) {
+								month = "0" + month;
+							}
+							if(strDate >= 0 && strDate <= 9) {
+								strDate = "0" + strDate;
+							}
+							var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+								" " + date.getHours() + seperator2 + date.getMinutes() +
+								seperator2 + date.getSeconds();
+							this.mytime = currentdate;
+						} else {
+							//							预约不拼车
+							this.myappointmentStatus = '4'
+							this.mytime = localStorage.getItem('ytime');
+						}
+					} else {
+						//					同意拼车	
+						if(localStorage.getItem('ytime') == '预约用车') {
+							//							不预约拼车
+							this.myappointmentStatus = '7'
+							var date = new Date();
+							var seperator1 = "-";
+							var seperator2 = ":";
+							var month = date.getMonth() + 1;
+							var strDate = date.getDate();
+							if(month >= 1 && month <= 9) {
+								month = "0" + month;
+							}
+							if(strDate >= 0 && strDate <= 9) {
+								strDate = "0" + strDate;
+							}
+							var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+								" " + date.getHours() + seperator2 + date.getMinutes() +
+								seperator2 + date.getSeconds();
+							this.mytime = currentdate;
+						} else {
+							//							预约拼车
+							this.myappointmentStatus = '6'
+							this.mytime = localStorage.getItem('ytime');
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

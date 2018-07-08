@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>验证手机号-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+</head>
+<body class="list_body">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>验证手机号</h5>
+</header>
+
+<section class="loginBox vaildata_phone">
+    <div class="item box-size">
+        <input class="input_b username box-size" type="text" value="189****6789" />
+    </div>
+    <div class="item box-size">
+        <input id="js_password" class="input_b password box-size" type="password" placeholder="验证码" />
+        <a href="javascript:;" id="js_code">获取验证码</a>
+    </div>
+</section>
+
+<div class="phone_btn box-size">
+    <a href="update_phone.html">立即验证</a>
+    <p>更换后账户信息不变，当前号码作废，下次需使用新手机号登录</p>
+</div>
+
+
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+
+</body>
+</html>

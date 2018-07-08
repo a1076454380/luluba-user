@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>我的司机说明-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+</head>
+<body class="list_body" style="background-color: #fff;">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>我的司机说明</h5>
+</header>
+<section class="user box-size">
+    <strong>问：我的司机是什么？</strong>
+
+    <p>答：我的司机可以让您收藏喜欢的司机。每次下单，您可以优先发送给他们。</p>
+
+    <strong>问：我的司机功能，和打电话找相熟司机有什么分别？</strong>
+
+    <p>答：我的司机页面记录了您相熟司机的位置和工作状态，下单前已掌握司机动态。另外，用我的司机功能，一键发送所有相熟司机，不用再挨个打电话了。而且在货拉拉下单，还有很多优惠哦！</p>
+    <strong>问：怎样收藏司机？</strong>
+
+    <p> 答：①进入我的司机页面，输入司机的电话号码，提交添加。如果司机不在平台上，货拉拉将为您发短信邀请他。只要他认证成功，将自动收藏。②订单完成，给司机好评，可以勾选自动收藏。</p>
+
+    <strong> 问：下单时，选择优先发送我的司机和不选择有什么区别？</strong>
+
+    <p> 答：我的司机享有两分钟优先抢单的时间，如果两分钟内我的司机没有接单，订单会自动发送给平台的其他司机。</p>
+
+    <strong>问：下单时，为什么系统有时候不让我点选优先发送给我的司机？</strong>
+
+    <p>答：①我的司机都在下班状态。由于下班中的司机不会收到您的订单信息，所以货拉拉建议您发送给平台所有司机。②当您选择的车型，并没有添加任何对应的司机。</p>
+
+    <strong>问：下单时，为什么系统不让我点选发送车队？</strong>
+
+    <p>答：1)您车队司机都在下班状态。由于下班中的司机不会收到您的订单信息，所以货拉拉建议您发送给平台的其他司机。2)当您选择的车型，并没有添加任何对应的车队司机。</p>
+
+    <strong>问：我有个相熟司机，想通过货拉拉向他下单，有什么办法？</strong>
+
+    <p>答：您可以到我的司机页面，输入该位相熟司机的电话，货拉拉将为您发短信邀请他注册货拉拉。当他成功认证，系统会自动把他添加到我的司机里。</p>
+
+
+</section>
+
+
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+
+</body>
+</html>

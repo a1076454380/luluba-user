@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>我的司机-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+</head>
+<body class="list_body" style="background-color: #f2f3f4;">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>我的司机</h5>
+    <a href="driver_why.html" class="icon iconfont icon-wen box-size"></a>
+</header>
+
+<ul class="driver_info box-size clearfix">
+    <li>
+        <a href="driver_detail.html" class="clearfix">
+            <span class="pic">
+                <img src="../../images/pic/1.jpg">
+            </span>
+            <p class="info">
+                <span>司机名字:某某某</span>
+                <span>联系方式:189****0000</span>
+            </p>
+            <i class="icon iconfont icon-jiantou-copy1"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href="driver_detail.html" class="clearfix">
+            <span class="pic">
+                <img src="../../images/pic/1.jpg">
+            </span>
+            <p class="info">
+                <span>司机名字:某某某</span>
+                <span>联系方式:189****0000</span>
+            </p>
+            <i class="icon iconfont icon-jiantou-copy1"></i>
+        </a>
+    </li>
+
+    <li>
+        <a href="driver_detail.html" class="clearfix">
+            <span class="pic">
+                <img src="../../images/pic/1.jpg">
+            </span>
+            <p class="info">
+                <span>司机名字:某某某</span>
+                <span>联系方式:189****0000</span>
+            </p>
+            <i class="icon iconfont icon-jiantou-copy1"></i>
+        </a>
+    </li>
+</ul>
+<!--<div class="no_info">-->
+    <!--<div>-->
+        <!--<img src="../../images/driver_icon.png">-->
+        <!--<p>收藏好司机</p>-->
+        <!--<p>直接发单给他们</p>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+
+</body>
+</html>

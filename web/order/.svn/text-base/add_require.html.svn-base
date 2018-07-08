@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>添加额外需求-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+</head>
+<body class="list_body">
+	<div id="app">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>添加额外需求</h5>
+</header>
+
+<section class="order_sure add_re">
+    <ul class="list_con box-size client">
+        <li>
+            <a href="javascript:;">
+                <label for="g1">搬运（司机另议）</label>
+                <input type="checkbox" id="g1" v-model="orderAddition.a" value="1">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <label for="g2">返程（附加40%路费）</label>
+                <input type="checkbox" id="g2" v-model="orderAddition.b" value="2">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <label for="g3">小推车（免费）</label>
+                <input type="checkbox" id="g3" v-model="orderAddition.c" value="3">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <label for="g4">拍照回单（免费）</label>
+                <input type="checkbox" id="g4" v-model="orderAddition.d" value="4">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <label for="g5">纸质回单（免费）</label>
+                <input type="checkbox" id="g5" v-model="orderAddition.e" value="5">
+            </a>
+        </li>
+    </ul>
+</section>
+
+<div class="car_price box-size">
+    <div class="btn">
+        <a href="javascript:void(0)" class="next_step" @click="show">确认</a>
+    </div>
+</div>
+
+</div>
+
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+<script type="text/javascript">
+	var myvue=new Vue({
+		el:'#app',
+		data:{
+			orderAddition:{a:false,b:false,c:false,d:false,e:false},
+			result:{}
+		},
+		methods:{
+			 show: function () {
+                this.result = [];
+                for (var i in this.orderAddition) {
+                    if(this.orderAddition[i] == true){
+                        this.result.push(i);
+                    }
+                }
+                localStorage.setItem('orderAddition',this.result)
+                window.location.href='order_sure.html'
+            }
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="XXX">
+		<meta name="keywords" content="XXX">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content=" black " />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="applicable-device" content="mobile">
+		<title>订单申诉-陆陆捌车主</title>
+		<link href="../../favicon.ico" rel="shortcut icon">
+		<link rel="stylesheet" href="../../css/m.debug.css">
+		<script src="../../js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+	</head>
+	<style type="text/css">
+		.next_step{width: calc(50% - .2rem);margin: 0 .1rem;}
+	</style>
+	<body style="background-color: #f2f3f4;">
+		<div id="app">
+			<header class="header">
+				<a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+				<h5>订单申诉</h5>
+			</header>
+			<section class="appeal1 appeal_pro">
+				<div class="appeal_tit">
+					<div class="tit">订单编号:{{list.orderId}}<span class="pro_statue">投诉中<!--申诉完成--> </span></div>
+					<div class="appeal_t">司机姓名：{{list.driverName}}</div>
+					<div class="appeal_t">司机电话：{{list.driverPhone}}</div>
+					<div class="appeal_t">投诉时间：{{list.createTime}}</div>
+				</div>
+				<div class="appeal_progess box-size">
+					<a>投诉内容</a>
+					<p>{{list.complainReason}}</p>
+				</div>
+			<div class="car_price box-size">
+				<div class="btn">
+					<a href="order_appeal.html" class="next_step">再次投诉</a>
+					<a href="javascript:void(0)" class="next_step" @click="orderok">取消投诉</a>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../../js/common.js"></script>
+		<script src="../../js/m.js"></script>
+		<script type="text/javascript">
+			var myvue=new Vue({
+				el:'#app',
+				data:{
+					list:[]
+				},
+				mounted:function(){
+					this.myajax()
+				},
+				methods:{
+					myajax:function(){
+						var that=this
+						$.ajax({
+							type:"post",
+							url:localStorage.getItem('myurl')+"/queryComplainByComplaintId",
+							async:true,
+							dataType:'json',
+							data:{
+								orderId:localStorage.getItem('complaintId')
+							},	
+							success:function(res){
+								that.list=res.data
+								localStorage.setItem('driverId',res.data.driverId)
+							}
+						});
+					},
+					orderok:function(){
+						var that=this
+						$.ajax({
+							type:"post",
+							url:localStorage.getItem('myurl')+"/deleteByOrderIdAndUserId",
+							async:true,
+							dataType:'json',
+							data:{
+								orderId:localStorage.getItem('complaintId'),
+								userId:localStorage.getItem('userid')
+							},	
+							success:function(res){
+								window.location.href='appeal_succ.html'
+							}
+						});
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

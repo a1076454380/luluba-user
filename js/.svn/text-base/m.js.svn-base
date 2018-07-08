@@ -1,0 +1,417 @@
+/**
+ * @description:
+ * @author: l_man(2017/10/23 8:40)
+ * @update: l_man (2017/10/23 8:40)
+ */
+//模拟货车数据
+//var car = ['小面包车', '中面包车', '小货车', '中型平板', '中型厢货'];
+// 监听plusready事件  
+
+var car = [
+    {
+        model: '小面包车',
+        price: 30
+    },
+    {
+        model: '中面包车',
+        price: 45
+    },
+    {
+        model: '小货车',
+        price: 63
+    },
+    {
+        model: '中型平板',
+        price: 95
+    }, {
+        model: '中型厢货',
+        price: 100
+    }
+];
+var LuLuBa = {
+    j: $(".gallery-top .swiper-pagination"),
+    commonUrl: './',//设定根目录
+    init: function () {
+        var that = this;
+        FastClick.attach(document.body);
+        that.setWindow();
+        that.resize();
+        that.loginLayer();
+        that.scrollTo();
+        try {
+            that.map()
+        } catch (e) {
+        }
+        that.startInfo();
+        that.fee_swiper();
+        that.radioSel();
+        that.driver();
+        that.zfCharce();
+        that.share();
+        //var mes = '请输入备注(如货物类别及跟车人数)';
+        //that.txtPlace('#r-mark_txt',mes);
+        that.loginOut();
+        that.orderAppeal();
+    },
+    //设置窗口宽高
+    setWindow: function () {
+        var winH = $(window).height(),
+            winW = $(window).width();
+        $("body").height(winH).width(winW);
+    },
+    //重置窗口高度
+    resize: function () {
+        var that = this;
+        $(window).on("resize", function () {
+            that.setWindow();
+        });
+    }, getQueryString: function (t) {
+        //获取url的参数值
+        var n = new RegExp("(^|&)" + t + "=([^&]*)(&|$)", "i"), e = window.location.search.substr(1).match(n);
+        return null != e ? decodeURI(e[2]) : null
+    },
+    //启动屏倒计时
+    countDown: function (n) {
+        var that = this;
+        if(localStorage.getItem('userid')==null){
+            window.location.href ='web/login.html';
+        }else{
+            window.location.href ='index.html';
+        }
+    },
+    loginOut:function(){
+        var cover = $('.sel_cover'),
+            layer = $('.sel_layer');
+        $(document).on('click','.js_login_out',function(){
+            cover.show();
+            layer.show();
+        }).on('click','.sel_layer .fl',function(){
+            cover.hide();
+            layer.hide();
+        })
+    },
+    //滑动导航
+    scrollTo: function () {
+        $(document).on("click", ".gallery-top .swiper-pagination span", function () {
+            var _this = $(this);
+            _this.addClass(".pagination-bullet-active").siblings().removeClass('.pagination-bullet-active');
+            var $t = _this.offset().left, $w = $(window).width(), $n = _this.width(), i = $('.gallery-top .swiper-pagination').scrollLeft();
+            if ($t < ($w / 2)) {
+                return false;
+            } else {
+                $(this).parent().animate({
+                    scrollLeft: $t - $w / 2
+                }, 0);
+            }
+
+        });
+    },
+    //性别选择
+    radioSel:function(){
+        $('.set_sex').click(function(){
+            $('.sex_cover,.sex_layer').show();
+        });
+
+        $(":radio").click(function(){
+            var sex = $(this).parent().find('label').html();
+            $('.sex_cover,.sex_layer').hide();
+            $('.set_sex div p').html(sex);
+
+        });
+    },
+    //司机页面
+    driver:function(){
+        //控制司机页面的显示隐藏
+        //$(“.id:not(‘.id:first’)”)
+        $('.d_info li:not(.d_info li:first)').find('a').click(function(){
+            $(this).parent().addClass("active").siblings().removeClass("active");
+            $(this).find('.zf').html('- 收起').siblings().find('.zf').html('+ 展开')
+        });
+    },
+    //订单完成后的投诉页面
+    orderAppeal:function(){
+      var type = $('.lv_grab_detail .grab').attr('data-type'),
+          btn = $('.lv_grab_detail .order_d_btn');
+        if(type =='0') {
+            btn.find('.lv_order_btn1').addClass('active').siblings().removeClass("active");
+            $('.lv_grab_detail .flags').html('进行中&gt')
+        } else if(type =='1') {
+            btn.find('.lv_order_btn2').addClass('active').siblings().removeClass("active");
+            $('.lv_grab_detail .flags').html('已完成&gt')
+        }
+    },
+    //底部菜单弹出
+    zfCharce:function(){
+        //支付弹窗
+        var cover = $('.payment_cover'),
+            layer = $('#payment');
+        $(document).on('click','.next_step',function(){
+            cover.show();
+            layer.stop().slideDown();
+        }).on('click','.payment_cover',function(){
+            layer.stop().slideUp();
+            cover.hide();
+        });
+        //支付图标切换
+        layer.find('ul li a').click(function(){
+           $(this).parent().addClass('cur').siblings().removeClass('cur')
+           $(this).find('label i').addClass('cur')
+            $(this).parent().siblings().find('label i').removeClass('cur')
+        });
+    },
+    //分享
+    share:function(){
+//分享
+        if($('.share_icon').length>0){
+            //share
+            window._bd_share_config={
+                "common":{
+                    "bdSnsKey":{},
+                    "bdText":"",
+                    "bdMini":"2",
+                    "bdMiniList":false,
+                    "bdPic":"",
+                    "bdStyle":"0",
+                    "bdSize":"32"},
+                "share":{}
+            };
+            with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        }
+
+        //分享弹窗
+        var cover = $('.share_cover'),
+            layer = $('.share_layer');
+        $(document).on('click','.js_share',function(){
+            cover.show();
+            layer.stop().show();
+        }).on('click','.share_cover',function(){
+            layer.stop().hide();
+            cover.hide();
+        }).on('click','#dateshadow',function(){
+            //日期弹窗
+            $('#datePage').stop().hide();
+            $(this).hide();
+        });
+        //日期弹窗
+        	try{ $('#appDateTime').date({theme:"datetime"});}catch(e){}
+
+    },
+    //地图
+    map: function () {
+        var that = this,
+            h1 = $('#r-result').height(),
+            h2 = $(window).height(), type = that.getQueryString('type');
+        $('#l-map').height(h2 - h1).css('padding-top', h1);
+
+
+        // 百度地图API功能
+        function G(id) {
+            return document.getElementById(id);
+        }
+
+        var map = new BMap.Map("l-map");
+        var point = null,
+            marker = null,
+            geo = new BMap.Geolocation();
+        geo.getCurrentPosition(function (e) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                //根据浏览器的定位进行初始展示
+                point = new BMap.Point(e.point.lng, e.point.lat);
+                map.centerAndZoom(point, 20);
+                marker = new BMap.Marker(point);
+				map.enableScrollWheelZoom(true)
+                pointLabel(marker);
+                dragging(marker);
+               clickMap();
+            } else {
+                alert('failed' + this.getStatus());
+            }
+        });
+
+
+        //创建标注
+        function pointLabel(m, n) {
+            n = n || '';
+            map.addOverlay(marker);               // 将标注添加到地图中
+            m.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            dirctInfo(n)
+        }
+
+        //获取标注地信息
+        function dirctInfo(n) {
+            n = n || '';
+            var gc = new BMap.Geocoder();            //创建地理编码
+            gc.getLocation(point, function (rs) {
+                showLocationInfo(point, rs, n);
+                $('#adress').val(rs.address)
+            });
+        }
+
+        //封装地址
+        function showLocationInfo(e, rs, n) {
+            n = n || '';
+            try{
+                if(rs.surroundingPois[0].title == 'undefined' || rs.surroundingPois[0].title == ''){
+                    n = '';
+                }else{
+                    n = rs.surroundingPois[0].title;
+                }
+            }catch(e){}
+            var addComp = rs.addressComponents;
+            mylocation = addComp.city + "  " + addComp.district + "  " + addComp.street + "  " + addComp.streetNumber;
+            var infoWindow = new BMap.InfoWindow(n + '<br><br>' + mylocation);  //创建信息窗口对象
+            marker.openInfoWindow(infoWindow);
+            $('#js_city').html(addComp.city);
+        }
+
+        //拖拽
+        function dragging(m) {
+            m.enableDragging();//可拖拽
+            m.addEventListener('dragend', function (e) {//拖动标注结束
+                point = e.point;
+                map.centerAndZoom(point, 20);
+                dirctInfo();
+            });
+        }
+
+        //点击地图
+        function clickMap() {
+            map.addEventListener('click', function (e) {
+                map.clearOverlays();
+                point = e.point;
+                map.centerAndZoom(point, 20);
+                marker = new BMap.Marker(point);
+                pointLabel(marker);
+                dragging(marker)
+            });
+        }
+
+        //点击确定按钮
+        var geoc = new BMap.Geocoder(),
+                 sure = $('.map_sure');
+                 sel = $('.map_sel')
+        type = that.getQueryString('type');
+        if (type == 'start')sure.html('确认起点');
+        if (type == 'end')sure.html('确认目的地');
+        //搜索
+        var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+            {
+                "input": "suggestId"
+                , "location": map
+            });
+
+        ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+            var str = "";
+            var _value = e.fromitem.value;
+            var value = "";
+            if (e.fromitem.index > -1) {
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+            value = "";
+            if (e.toitem.index > -1) {
+                _value = e.toitem.value;
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+            G("searchResultPanel").innerHTML = str;
+        });
+
+        var myValue;
+        ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+            var _value = e.item.value;
+            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+            G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+            setPlace();
+        });
+
+        function setPlace() {
+            map.clearOverlays();    //清除地图上所有覆盖物
+            function myFun() {
+                point = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                map.centerAndZoom(point, 20);
+                pointLabel(marker, myValue);
+            }
+
+            var local = new BMap.LocalSearch(map, { //智能搜索
+                onSearchComplete: myFun
+            });
+            local.search(myValue);
+        }
+    },
+    //index输入框信息
+    startInfo: function () {
+
+
+    },
+    fee_swiper: function () {
+        var feeSwiper = new Swiper('.free_swiper', {
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            onSlideChangeEnd: function (swiper) {
+                if (swiper.activeIndex > 2)
+                    $('.price_sp').css('display', 'none');
+                else
+                    $('.price_sp').css('display', 'block');
+                swiper.activeIndex == 2 ? $('.price_sp .con p').html('双排座(免费)') : $('.price_sp .con p').html('全拆座(免费)');
+
+            }
+        });
+    },
+    //登录
+    loginLayer: function () {
+        var loginData = {
+            userName: $.trim($('#js_username').val()),
+            code: $.trim($('#js_password').val())
+        };
+        if (loginData.userName == '')return false;
+        if (loginData.code == '')return false;
+        if (loginData.userName.length > 3 && loginData.code.length > 0) {
+            $('.input_login').removeClass('disabled');
+        }
+        //var reg_phone = /^1(3|4|5|7|8)\d{9}$/;
+        //if (!reg_phone.test(loginData.userName) || !loginData.userName) {
+        //    alert('手机号输入错误');
+        //    return false;
+        //}
+    }
+};
+
+/**
+ * localStorage封装
+ */
+/*设置与获取Cookie*/
+var Cookie = {}
+Cookie.write = function (key, value, duration) {
+    var d = new Date();
+    d.setTime(d.getTime() + 1000 * 60 * 60 * 24 * 30);
+    document.cookie = key + "=" + encodeURI(value) + "; expires=" + d.toGMTString();
+};
+Cookie.read = function (key) {
+    var arr = document.cookie.match(new RegExp("(^| )" + key + "=([^;]*)(;|$)"));
+    if (arr != null)
+        return decodeURIComponent(arr[2]);
+    return "";
+};
+//定义本地存储对象
+var storage = {
+    getItem: function (key) {
+        return window.localStorage ? localStorage.getItem(key) : Cookie.read(key);
+    },
+    setItem: function (key, val) {
+        if (window.localStorage) {
+            localStorage.setItem(key, val);
+        } else {
+            Cookie.write(key, val);
+        }
+    }
+};
+
+
+$(function () {
+    LuLuBa.init();
+});

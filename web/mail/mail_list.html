@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>消息-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+</head>
+<style type="text/css">
+	.list_con li div{width: 40%;white-space: nowrap;}
+	 .list_con li p{width: 50%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+</style>
+<body class="list_body">
+	<div id="app">
+		<!--头部-->
+		<header class="header">
+		    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back()"></a>
+		    <h5>消息</h5>
+		</header>
+		<!--列表-->
+		<ul class="list_con box-size client">
+		    <li v-for="val in list" @click="opendetail(val.messageTitle,val.messageContent,val.userNewsId)" :class="val.status=='1'?'active':''">
+		        <a href="javascript:void(0)">
+		            <p>{{val.messageTitle}}</p>
+		            <div>
+		                {{val.createTime}}
+		            </div>
+		        </a>
+		    </li>
+		</ul>
+	</div>
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+<script type="text/javascript">
+	var myvue=new Vue({
+		el:'#app',
+		data:{
+			list:[]
+		},
+		methods:{
+			opendetail:function(title,content,userNewsId){
+				localStorage.setItem('newtitle',title),
+				localStorage.setItem('newcontent',content)
+				var that=this
+				$.ajax({
+					type:"post",
+					url:localStorage.getItem('myurl')+"/updateBystatus",
+					async:true,
+					dataType:'json',
+					data:{
+						status:'1',
+						userNewsId:userNewsId
+					},
+					success:function(res){
+						
+						window.location.href='mail_detail.html'
+					}
+				});
+				
+			},
+			back:function(){
+				mui.openWindow({
+					url:'../../index.html',
+					id:'index'
+				})
+			}
+		},
+		mounted:function(){
+			var that=this
+			$.ajax({
+				type:"post",
+				url:localStorage.getItem('myurl')+"/queryLmessageAll",
+				async:true,
+				dataType:'json',
+				data:{
+					userId:localStorage.getItem('userid')
+				},
+				success:function(res){
+					console.log(res)
+					that.list=res.data
+				}
+			});
+		}
+	})
+</script>
+</body>
+</html>

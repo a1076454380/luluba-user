@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="XXX">
+		<meta name="keywords" content="XXX">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content=" black " />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="applicable-device" content="mobile">
+		<title>订单-陆陆捌货到家</title>
+		<link href="../../favicon.ico" rel="shortcut icon">
+		<link rel="stylesheet" href="../../css/m.debug.css">
+		<script src="../../js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+	</head>
+
+	<body class="list_body">
+		<!--头部-->
+		<div id="app">
+			<header class="header">
+				<a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back()"></a>
+				<h5>订单</h5>
+			</header>
+
+			<ul class="order_list box-size clearfix order_his">
+				<li v-for="val in list" @click="opendetail(val.orderId)">
+					<a href="javascript:void(0)">
+						<p>
+							订单编号:{{val.orderId}}
+							<span class="flags" v-show='val.orderStatus==0'>等待接单&gt;</span>
+							<span class="flags" v-show='val.orderStatus==1'>进行中&gt;</span>
+							<span class="flags" v-show='val.orderStatus==2'>已完成&gt;</span>
+							<span class="flags" v-show='val.orderStatus==3'>投诉中&gt;</span>
+							<span class="flags" v-show='val.orderStatus==5'>退款中&gt;</span>
+						</p>
+						<p>{{val.appointmentStatus | yyue}}    <span v-show="val.appointmentStatus!=4&&val.appointmentStatus!=6">{{val.createTime}}</span><span v-show="val.appointmentStatus==4||val.appointmentStatus==6">{{val.orderAppointment}}</span></p>
+						<p>{{val.orderStart}}</p>
+						<p>{{val.orderEnd}}</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/m.js"></script>
+		<script type="text/javascript">
+			var myvue = new Vue({
+				el: '#app',
+				data: {
+					list: []
+				},
+				methods: {
+					myajax: function() {
+						var that = this
+						$.ajax({
+							type: "post",
+							url: localStorage.getItem('myurl') + "/qyeryAllByUserId",
+							async: true,
+							dataType: 'json',
+							data: {
+								userId: localStorage.getItem('userid')
+							},
+							success: function(res) {
+								console.log(res)
+								that.list = res.data
+							}
+						});
+					},
+					opendetail: function(id) {
+						localStorage.setItem('orderid', id)
+						window.location.href = 'order_detail.html'
+					},
+					back: function() {
+						mui.openWindow({
+							url: '../../index.html',
+							id: 'index'
+						})
+					}
+				},
+				mounted: function() {
+					this.myajax()
+				},
+				filters: {
+					yyue: function(value) {
+						if(value == 4 || value == 6) {
+							return '预约单'
+						} else {
+							return '普通单'
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>登录-陆陆捌货到家</title>
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../css/m.debug.css">
+    <script src="../js/flexible.js"></script>
+    <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+    <script src="../js/bmob-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<!--头部-->
+<div id="app">
+    <header class="header">
+        <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+        <h5>登录</h5>
+    </header>
+    <section class="loginBox">
+        <div class="item box-size">
+            <i class="icon iconfont icon-dianhua"></i>
+            <input id="js_username" class="input_b username box-size" type="text" placeholder="请输入手机号" v-model="phone"/>
+            <i class="icon iconfont icon-cuowu" @click="clear"></i>
+        </div>
+        <div class="item box-size">
+            <i class="icon iconfont icon-ziyuan"></i>
+            <input id="js_password" class="input_b password box-size" type="text" placeholder="请输入验证码" v-model="pwd"/>
+            <a href="javascript:;" id="js_code" @click="addcode">{{state}}</a>
+        </div>
+        <div class="item box-size" @click="myajax">
+           <input class="input_login" type="submit" value="登录" />
+        </div>
+        <p class="js_agree">登录即表示同意 <a href="user.html">陆陆捌用户协议</a></p>
+    </section>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/m.js"></script>
+<script type="text/javascript">
+	var myvue=new Vue({
+		el:'#app',
+		data:{
+			code:'',
+			phone:'',
+			state:'获取验证码',
+			pwd:''
+		},
+		methods:{
+			clear:function(){
+				this.phone=''
+			},
+			myajax:function(){
+				var that=this
+				if(that.phone!=''){
+					if(that.pwd!=''){
+						if(that.code==that.pwd&&that.phone!=''){
+							$.ajax({
+								type:"get",
+								url:localStorage.getItem('myurl')+"/queryLoginByPhone",
+								async:false,
+								dataType:'json',
+								data:{
+									userPhone:that.phone
+								},
+								success:function(res){
+									if(res.status==200){
+										localStorage.setItem('userid',res.data.userId)
+										localStorage.setItem('userimg',res.data.userImg)
+										localStorage.setItem('username',res.data.uerNick)
+										localStorage.setItem('userphone',that.phone)
+										localStorage.setItem('usersex',res.data.uerSex)
+										window.location.href='../index.html'
+									}
+									
+								}
+							});
+						}else{
+							alert('验证码错误,请重试!')
+						}
+					}else{
+						alert('请输入验证码')
+					}
+				}else{
+					alert('请输入手机号')
+				}
+			},
+			addcode:function(){
+				this.code= Math.floor(Math.random() * 9000) + 1000;
+				var that=this
+						if(this.state != '验证码已发送') {
+							Bmob.initialize("f7174458eab2fe581941c6a4aa56a0b7","739d8351ef20781bb364acf69dee4772");
+							Bmob.Sms.requestSms({
+								"mobilePhoneNumber": that.phone,
+								"content": "您的验证码是：" + that.code + ", 有效期是10分钟。"
+							}).then(function(obj) {
+								that.state = '验证码已发送'
+							}, function(err) {
+								that.state = '验证码发送失败'
+							});
+						}
+			}
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页-陆陆捌货到家</title>
+		<link href="favicon.ico" rel="shortcut icon">
+		<link rel="stylesheet" href="css/sidenav.min.css">
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/m.debug.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<style type="text/css">
+		#app {
+			width: 100%;
+			height: 100%;
+		}
+		
+		.js_tips a {
+			border-top: 2px solid #fe5722;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+		
+		.fade-enter-active,
+		.fade-leave-active {
+			left: 0;
+			transition: all .3s;
+		}
+		
+		.fade-enter,
+		.fade-leave-to {
+			left: -100%;
+		}
+	</style>
+
+	<body class="navslide_meau">
+		<!--侧栏菜单-->
+		<div id="app">
+			<div id="container" style="display: none;"></div>
+			<div id="panel" style="display: none;"></div>
+			<transition name="fade">
+				<div class="mceng" v-if="showbo" @click="showboo">
+					<nav class="mynav">
+						<div class="meau_advater">
+							<a class="pic" href="web/advater/advater_list.html">
+								<img :src="userimg | muimg" v-show="userimg!=''">
+								<img src="images/driver_icon.png" v-show="userimg==''" />
+							</a>
+							<a href="web/advater/advater_list.html" id="js_immedia_login" v-show="username!=''">{{username}}</a>
+							<a href="web/advater/advater_list.html" id="js_immedia_login" v-show="username==''">点击设置用户名</a>
+						</div>
+						<ul class="meau_list">
+							<li>
+								<a href="web/order/orde_history.html"><i class="icon iconfont icon-order"></i>订单记录</a>
+							</li>
+							<li>
+								<a href="web/mail/mail_list.html"><i class="icon iconfont icon-inbox"></i>消息中心</a>
+							</li>
+							<li>
+								<a href="web/client/client_contact.html"><i class="icon iconfont icon-msnui-service-call"></i>客服中心</a>
+							</li>
+							<li>
+								<a href="web/appeal/appeal_list.html"><img src="images/tsu.png" class="tsu" />投诉中心</a>
+							</li>
+							<li>
+								<a href="web/more/more_list.html"><i class="icon iconfont icon-shezhi"></i>更多设置</a>
+							</li>
+						</ul>
+						<div class="in_footer">
+							<i class="icon iconfont icon-huoche"></i> 拉货就找陆陆捌 v1.0
+						</div>
+					</nav>
+				</div>
+			</transition>
+			<!--主内容-->
+			<section class="slidenav_con">
+				<div class="header_top" style="position: fixed;top: 0;left: 0;width: 100%;">
+					<a href="javascript:void(0);" class="menu-button icon iconfont icon-gerenshixin toggle" @click="showboo"></a>
+					<img src="images/logo.jpg">
+				</div>
+				<div class="car_detail" style="position: fixed;top: 1.3rem;left: 0;width: 100%;">
+					<div class="swiper-container02">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" v-for="(val,index) in list" @click="tapnav(val,index)" :class="myindex==index?'swiper-active':''">{{val.carouselName}}</div>
+						</div>
+					</div>
+					<div class="swiper-container gallery-top">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" v-for="val in list"><img :src="val.carouserlImage | muimg" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="car_position box-size" style="position: fixed;top: 6rem;left: 0;width: 100%;">
+					<div class="box-size">
+						<a href="web/map.html" class="start" data-type="start">
+							<block v-show="startRoad==null">点击选择起点</block>
+							<block v-show="startRoad!=null">
+								{{startRoad}}
+								<!--<span>{{startRoadD}}</span>-->
+							</block>
+						</a>
+						<a href="web/map02.html" class="end" data-type="end">
+							<block v-show="endRoad==null">点击选择终点</block>
+							<block v-show="endRoad!=null">
+								{{endRoad}}
+								<!--<span>{{endRoadD}}</span>-->
+							</block>
+						</a>
+					</div>
+					<div class="pin_check box-size">
+						<input type="radio" id="pin" name="pin" v-model="appointmentStatus" value="1">
+						<label for="pin" name="pin">小单拼车</label>
+						<input type="radio" id="pinNo" name="pin" v-model="appointmentStatus" value="0" checked="checked">
+						<label for="pinNo" name="pin">整车出行</label>
+					</div>
+				</div>
+				<div class="car_price box-size">
+					<div class="btn">
+						<a href="javascript:void(0)" class="now" @click="tosubmit">{{ytime=='预约用车'?'现在用车':'预约用车'}}</a>
+						<a href="#popover" id="openPopover" class="mui-btn" @click="ytimechange">{{ytime}}</a>
+					</div>
+				</div>
+			</section>
+		</div>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=e8d613b264dcd6ca83d12f759c9690ed"></script>
+		<script src="js/common.js"></script>
+		<script src="js/sidenav.min.js"></script>
+		<script src="js/m.js"></script>
+		<script>
+			var myvue = new Vue({
+				el: '#app',
+				data: {
+					list: [],
+					money: 0,
+					startRoad: localStorage.getItem('startRoad'),
+					startRoadD: localStorage.getItem('startRoadD'),
+					qname: localStorage.getItem('qname'),
+					qphone: localStorage.getItem('qphone'),
+					endRoad: localStorage.getItem('endRoad'),
+					endRoadD: localStorage.getItem('endRoadD'),
+					zname: localStorage.getItem('zname'),
+					zphone: localStorage.getItem('zphone'),
+					ytime: '预约用车',
+					appointmentStatus: 0,
+					charge: [],
+					alllength: 0,
+					userid: localStorage.getItem('userid'),
+					userimg: localStorage.getItem('userimg'),
+					username: localStorage.getItem('username'),
+					myindex: -1,
+					showbo: false
+				},
+				methods: {
+					ytimechange: function() {
+						var that=this
+						var date = new Date();
+						var picker = new mui.PopPicker({
+							layer: 3
+						});
+						var datejson = []
+//						插入后七天日期
+						for(var i = 1; i < 6; i++) {
+							datejson.push({
+								value: date.getDate() + i,
+								text: date.getDate() + i + '号',
+								children: []
+							})
+							for(var l = 1; l < 24; l++) {
+								datejson[i - 1].children.push({
+									value: l,
+									text: l + "点",
+									children: []
+								})
+								for(var j=1;j<60;j++){
+									datejson[i - 1].children[l-1].children.push(
+										{
+											value: j,
+											text: j+'分'
+										}
+									)
+								}
+							}
+						}
+						//					插入当前日期
+						datejson.unshift({
+							value: date.getDate(),
+							text: date.getDate() + '号',
+							children: []
+						})
+						//					插入当前小时
+						for(var l = date.getHours(); l < 25; l++) {
+							datejson[0].children.push({
+								value: l,
+								text: l + "点",
+								children: []
+							})
+						}
+						//					插入当前分钟
+						for(var l = date.getMinutes(); l < 60; l++) {
+							datejson[0].children[0].children.push({
+								value: l,
+								text: l + '分'
+							})
+						}
+						for(var i=1;i<datejson[0].children.length;i++){
+							for(var l = 1; l < 60; l++) {
+								datejson[0].children[i].children.push({
+									value: l,
+									text: l + '分'
+								})
+							}
+						}
+						picker.setData(datejson)
+						picker.pickers[0].setSelectedIndex(0);
+						picker.pickers[1].setSelectedIndex(0);
+						var that=this;
+						picker.show(function(selectItems) {
+							var month='';
+								mydate='';
+								hours='';
+								time='';
+							if(month<10){
+								month='0'+(date.getMonth() + 1)
+							}
+							if(selectItems[0].value<10){
+								mydate='0'+selectItems[0].value
+							}else{
+								mydate=selectItems[0].value
+							}
+							if(selectItems[1].value<10){
+								hours='0'+selectItems[1].value
+							}else{
+								hours=selectItems[1].value
+							}
+							if(selectItems[2].value<10){
+								time='0'+selectItems[2].value
+							}else{
+								time=selectItems[2].value
+							}
+							that.ytime=date.getFullYear() + '-' + month + '-' + mydate + ' ' + hours + ':' + time
+							that.tosubmit()
+						})
+					},
+					showboo: function() {
+						this.showbo = !this.showbo
+					},
+					myajax: function() {
+						var that = this
+						$.ajax({
+							type: "get",
+							url: localStorage.getItem('myurl') + "/queryuserCarsouelAll",
+							async: true,
+							dataType: 'json',
+							success: function(res) {
+								that.list = res.data
+							}
+						});
+						this.swip()
+					},
+					tapnav: function(myid, index) {
+						var that = this
+						var mySwiper = new Swiper('.swiper-container');
+						mySwiper.slideTo(index, 1000, false)
+						that.myindex = index
+						var mycaruu = myid.carouselId
+						localStorage.setItem('carType', mycaruu)
+					},
+					tosubmit: function() {
+						//				订单时间
+						localStorage.setItem('ytime', this.ytime);
+						//				是否拼车
+						localStorage.setItem('appointmentStatus', this.appointmentStatus);
+						//				总长度
+						localStorage.setItem('alllength', this.alllength)
+						if(localStorage.getItem('carType') != null) {
+							if(this.startRoad != null && this.endRoad != null && this.qname != null && this.qphone != null && this.zname != null && this.zphone != null) {
+								window.location.href = 'web/order/order_sure.html'
+							} else {
+								alert('订单信息不完整!请稍后再试')
+							}
+						} else {
+							alert('请选择使用的车型(点击顶部车辆名称)')
+						}
+
+					},
+					swip: function() {
+						var mySwiper = new Swiper('.swiper-container', {
+							loop: false,
+							observer: true,
+							observeParents: true,
+							on: {
+								slideChangeTransitionEnd: function() {},
+							}
+						})
+						var swiper = new Swiper('.swiper-container02', {
+							slidesPerView: 3,
+							spaceBetween: 30,
+							freeMode: true,
+							observer: true,
+							observeParents: true
+						});
+					}
+				},
+				mounted: function() {
+					localStorage.setItem('myurl', 'http://39.107.70.18/Transportation')
+					localStorage.removeItem('orderAddition')
+					localStorage.removeItem('ytime')
+					localStorage.removeItem('carType')
+					var that = this
+					
+					if(localStorage.getItem('userid') == null) {
+											window.location.href = 'web/login.html';
+											return;
+										}
+					//侧栏导航
+					$('[data-sidenav]').sidenav();
+					var that = this
+					var map = new AMap.Map('container', {
+						zoom: 15,
+						center: [116.39, 39.9]
+					});
+					
+					AMap.service('AMap.Driving', function() { //回调函数
+						//实例化Driving
+						driving = new AMap.Driving({
+							city: '徐州市'
+						});
+						var driving = new AMap.Driving({
+							map: map,
+							panel: "panel"
+						});
+						//			传名称
+						driving.search([{
+							keyword: localStorage.getItem('startRoad')
+						}, {
+							keyword: localStorage.getItem('endRoad')
+						}], function(status, result) {
+							that.alllength = result.routes[0].distance / 1000
+						});
+					})
+
+					var wgtVer = null;
+					//					获取当前应用版本
+					function plusReady() {
+						plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+							wgtVer = inf.version;
+							$.ajax({
+								type: "get",
+								url: localStorage.getItem('myurl') + "/queryByversion",
+								dataType: 'json',
+								async: true,
+								success: function(res) {
+									if(res.data.versionUserCode != wgtVer) {
+										// 弹出提示信息对话框
+										plus.nativeUI.confirm("有新版本发布啦,是否立即下载??", function(e) {
+											if(e.index == 0) {
+												plus.runtime.openURL(res.data.versionAndroidUserUploadUrl)
+											} else {
+												if(localStorage.getItem('userid') == null) {
+													window.location.href = 'web/login.html';
+													return;
+												}
+											}
+										});
+									} else {
+										if(localStorage.getItem('userid') == null) {
+											window.location.href = 'web/login.html';
+											return;
+										}
+									}
+								}
+							})
+						});
+					}
+					if(window.plus) {
+						plusReady();
+					} else {
+						document.addEventListener('plusready', plusReady, false);
+					}
+					
+					that.swip()
+					
+					that.myajax()
+					if(localStorage.getItem('userphone') != null) {
+						$.ajax({
+							type: "get",
+							url: localStorage.getItem('myurl') + "/queryLoginByPhone",
+							async: false,
+							dataType: 'json',
+							data: {
+								userPhone: localStorage.getItem('userphone')
+							},
+							success: function(res) {
+								if(res.data.length == 0) {
+									alert('您的用户已被删除')
+									localStorage.clear()
+									window.location.href = 'web/login.html'
+								}
+							}
+						});
+					}
+					//					订单提示
+					setInterval(function() {
+						$.ajax({
+							type: "post",
+							url: localStorage.getItem('myurl') + "/qyeryAllByUserIdAndOrderStatus",
+							async: true,
+							data: {
+								userId: localStorage.getItem('userid')
+							},
+							dataType: 'json',
+							success: function(res) {
+								if(res.data.length > 0) {
+									// 扩展API加载完毕，现在可以正常调用扩展API
+									// 获取客户端标识信息
+									var mydata = res.data[0]
+									$.ajax({
+										type: "post",
+										url: localStorage.getItem('myurl') + "/car/updateByStatusAndCarId",
+										async: true,
+										data: {
+											carId: mydata
+										},
+										success: function(res) {
+											document.addEventListener("plusready", function() {
+												var info = plus.push.getClientInfo();
+												plus.push.createMessage('您的订单已被接,请点击查看!');
+												// 添加监听从系统消息中心点击消息启动事件
+												plus.push.addEventListener("click", function(msg) {
+													// 分析msg.payload处理业务逻辑 
+													localStorage.setItem('orderid', mydata)
+													window.location.href = './web/order/order_detail.html'
+												}, false);
+											}, false);
+										}
+									});
+
+								}
+							}
+						});
+					}, 1000)
+				},
+				filters: {
+					muimg: function(value) {
+						return localStorage.getItem('myurl') + value.substr(value.indexOf('/uploadImg'))
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

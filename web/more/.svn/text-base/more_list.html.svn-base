@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>更多设置-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<style type="text/css">
+	.list_con li div{margin: 0;}
+	.list_con li p{margin-left: .2rem;}
+</style>
+<body class="list_body">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back()"></a>
+    <h5>更多设置</h5>
+</header>
+
+<!--列表-->
+<ul class="list_con box-size client">
+    <li>
+        <a href="user_code.html">
+            <p>用户守则</p>
+            <div>
+                <i class="icon iconfont icon-jiantou-copy1"></i>
+            </div>
+        </a>
+    </li>
+</ul>
+
+<ul class="list_con box-size client">
+    <li>
+        <a href="../feed_back.html">
+            <p>意见反馈</p>
+            <div>
+                <i class="icon iconfont icon-jiantou-copy1"></i>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="../share.html">
+            <p>分享</p>
+            <div>
+                <i class="icon iconfont icon-jiantou-copy1"></i>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="user_about.html">
+            <p>关于陆陆捌</p>
+            <div>
+                <i class="icon iconfont icon-jiantou-copy1"></i>
+            </div>
+        </a>
+    </li>
+</ul>
+<a href="javascript:;" class="js_login_out">退出登录</a>
+
+<div class="sel_cover"></div>
+<div class="sel_layer">
+    <h5>您确定要离开吗？</h5>
+    <div class="sel_btn box-size">
+        <a href="javascript:;" class="fl">取消</a>
+        <a href="javascript:void(0)" class="fr" id="clear">确定</a>
+    </div>
+</div>
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+<script type="text/javascript">
+	function back(){
+		mui.openWindow({
+					url:'../../index.html',
+					id:'index'
+				})
+	}
+	$(function(){
+		$('#clear').click(function(){
+			localStorage.clear()
+			window.location.href='../login.html'
+		})
+	})
+</script>
+</body>
+</html>

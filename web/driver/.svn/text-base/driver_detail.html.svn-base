@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>司机详情-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+</head>
+<body class="list_body">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>司机详情</h5>
+</header>
+
+<ul class="order_list box-size clearfix d_info">
+    <li>
+        <a href="javascript:;">
+            <span class="d_advater">
+                <img src="../../images/pic/1.jpg">
+            </span>
+        </a>
+
+    </li>
+    <li class="active">
+        <a href="javascript:;">
+            <p>
+                <span  class='icon iconfont icon-jiantou6'></span>
+                司机编号
+                <span href="javascript:;" class="box-size zf">- 收起</span>
+            </p>
+        </a>
+        <div class="js_box_con">
+            <span>
+                0000000000
+            </span>
+        </div>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <p>
+                <span  class='icon iconfont icon-jiantou6'></span>
+                介绍
+                <span href="javascript:;" class="box-size zf">+ 展开</span>
+            </p>
+        </a>
+        <div class="js_box_con">
+            <span>
+                司机简介司机简介司机简介司机简介司机简介司机简介司机简介司机简介司机简介司机简介
+            </span>
+        </div>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <p>
+                <span  class='icon iconfont icon-jiantou6'></span>
+                姓名
+                <span href="javascript:;" class="box-size zf">+ 展开</span>
+            </p>
+        </a>
+        <div class="js_box_con">
+            <span>
+                名字
+            </span>
+        </div>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <p>
+                <span  class='icon iconfont icon-jiantou6'></span>
+                联系方式
+                <span href="javascript:;" class="box-size zf">+ 展开</span>
+            </p>
+        </a>
+        <div class="js_box_con">
+            <span>
+                15256852017
+            </span>
+        </div>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <p>
+                <span  class='icon iconfont icon-jiantou6'></span>
+                接单时间
+                <span href="javascript:;" class="box-size zf">+ 展开</span>
+            </p>
+        </a>
+        <div class="js_box_con">
+            <span>
+                2017年10月26日 下午 17:30
+            </span>
+        </div>
+    </li>
+    <li>
+        <a href="javascript:;">
+
+            <p>
+                <span  class='icon iconfont icon-jiantou6'></span>
+                接单地址
+                <span href="javascript:;" class="box-size zf">+ 展开</span>
+            </p>
+        </a>
+
+        <div class="js_box_con">
+            <span>
+                天安门 - 天坛
+            </span>
+        </div>
+    </li>
+
+</ul>
+
+<script src="../../js/common.js"></script>
+<script src="../../js/m.js"></script>
+
+</body>
+</html>

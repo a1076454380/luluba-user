@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>意见反馈-陆陆捌货到家</title>
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../css/m.debug.css">
+    <script src="../js/flexible.js"></script>
+    <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body style="background-color: #f2f3f4;">
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>意见反馈</h5>
+</header>
+
+<section class="lv_feed_back">
+    <textarea placeholder="留下您的意见与建议吧" class="box-size" id="lv_ts_area"></textarea>
+    <div class="car_price box-size">
+        <div class="btn">
+            <a href="javascipt:void(0)" class="next_step">确认</a>
+        </div>
+    </div>
+</section>
+
+<script src="../js/common.js"></script>
+<script src="../js/m.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.next_step').click(function(){
+			$.ajax({
+				type:"post",
+				url:localStorage.getItem('myurl')+"/insertSelectiveBySuggestion",
+				async:false,
+				dataType:'json',
+				data:{
+					userId:localStorage.getItem('userid'),
+					suggestContent:$('textarea').val()
+				},
+				success:function(res){
+					window.location.href='../index.html'
+				}
+			});
+		})
+		
+	})
+</script>
+</body>
+</html>

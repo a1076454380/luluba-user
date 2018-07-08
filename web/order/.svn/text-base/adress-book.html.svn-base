@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="XXX">
+		<meta name="keywords" content="XXX">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content=" black " />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="applicable-device" content="mobile">
+		<title>确认订单-陆陆捌货到家</title>
+		<link href="../../favicon.ico" rel="shortcut icon">
+		<link rel="stylesheet" href="../../css/m.debug.css">
+		<script src="../../js/flexible.js"></script>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body class="list_body">
+		<!--头部-->
+		<header class="header">
+			<a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+			<h5>添加联系人</h5>
+		</header>
+
+		<!--列表-->
+		<section class="order_sure">
+			<ul class="list_con box-size client">
+
+			</ul>
+		</section>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			document.addEventListener("plusready", function() {
+					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) {
+						addressbook.find(null, function(contacts) {
+							for(var a in contacts) {
+								var user = contacts[a].displayName;
+								var phone = contacts[a].phoneNumbers[0].value;
+								$('.client').append("<li data-user="+user+" data-phone="+phone+">" + user + ":" + phone + "</li>")
+							}
+						}, function(e) {
+							alert("Find contact error: " + e.message);
+						}, {
+							multi: true
+						});
+					});
+				}, false);
+			$('ul').on('click','li',function(){
+				localStorage.setItem('user',$(this).attr('data-user'))
+				localStorage.setItem('mphone',$(this).attr('data-phone'))
+				window.history.back()
+			})
+		})
+	</script>
+
+</html>

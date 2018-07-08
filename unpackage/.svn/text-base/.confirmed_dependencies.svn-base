@@ -1,0 +1,122 @@
+{
+	"index.html": {
+		"refer": [
+			"web/order/order_sure.html",
+			"web/map.html",
+			"web/map02.html",
+			"web/advater/advater_list.html",
+			"web/order/orde_history.html",
+			"web/client/client_contact.html",
+			"web/mail/mail_list.html",
+			"web/more/more_list.html",
+			"web/appeal/appeal_list.html",
+			"web/login.html",
+			"web/order/order_detail.html"
+		],
+		"resources": [
+			"js/date.js",
+			"js/jquery.min.js",
+			"js/sidenav.min.js",
+			"js/swiper.min.js",
+			"images/tsu.png",
+			"images/driver_icon.png",
+			"js/m.js",
+			"css/sidenav.min.css",
+			"js/common.js",
+			"images/logo.jpg",
+			"css/swiper.min.css",
+			"css/m.debug.css",
+			"css/date.css",
+			"js/flexible.js",
+			"favicon.ico"
+		]
+	},
+	"web/order/order_sure.html": {
+		"refer": [
+			"web/order/adress-book.html",
+			"index.html",
+			"web/order/orde_history.html",
+			"web/order/add_require.html"
+		],
+		"resources": []
+	},
+	"web/order/adress-book.html": {
+		"refer": [
+			"web/order/order_sure.html"
+		],
+		"resources": []
+	},
+	"web/map.html": {
+		"refer": [
+			"index.html"
+		],
+		"resources": []
+	},
+	"start.html": {
+		"refer": [
+			"web/login.html",
+			"index.html"
+		]
+	},
+	"web/login.html": {
+		"refer": [
+			"index.html",
+			"web/more/more_list.html"
+		]
+	},
+	"web/order/orde_history.html": {
+		"refer": [
+			"web/order/order_detail.html",
+			"index.html",
+			"web/order/order_sure.html"
+		]
+	},
+	"web/order/order_detail.html": {
+		"refer": [
+			"web/appeal/appeal_succ.html",
+			"web/order/orde_history.html",
+			"web/appeal/order_appeal.html"
+		]
+	},
+	"web/appeal/appeal_succ.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"web/client/client_contact.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"web/mail/mail_list.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"web/more/more_list.html": {
+		"refer": [
+			"index.html",
+			"web/login.html"
+		]
+	},
+	"web/appeal/appeal_list.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"web/map02.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"web/order/add_require.html": {
+		"refer": [
+			"web/order/order_sure.html"
+		]
+	},
+	"web/appeal/order_appeal.html": {
+		"refer": [
+			"web/appeal/appeal_succ.html"
+		]
+	}
+}

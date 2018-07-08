@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XXX">
+    <meta name="keywords" content="XXX">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content=" black "/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="applicable-device" content="mobile">
+    <title>用户守则-陆陆捌货到家</title>
+    <link href="../../favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../css/m.debug.css">
+    <script src="../../js/flexible.js"></script>
+</head>
+<body>
+<!--头部-->
+<header class="header">
+    <a class='icon iconfont icon-left_arrow js_back' href="javascript:history.back();"></a>
+    <h5>用户守则</h5>
+</header>
+<section class="user box-size">
+    <p>1. 所有路程收费为点到点收费。</p>
+    <p>2. 所有额外要求如携带宠物等请在下单时清楚列明,否则司机有权拒绝委任。</p>
+    <p>3. 司机免费等候时长请查看收费标准，若涉及逾时等候费，请根据收费标准内说明进行计算。</p>
+    <p>4. 用户若临时改变行程,须根据货拉拉收费标准调整收费。</p>
+    <p>5. 未经司机同意，请勿在车内吸烟或饮食。</p>
+    <p>6. 请保持车厢清洁，不要损坏、弄污车厢或弃置垃圾在车内。</p>
+    <p>7. 用户需支付对应的清洁费</p>
+    <p>8. 请勿要求司机在禁止停车或泊车的地点等候，或要求司机违反交通规则。</p>
+    <p>9. 用户托运的货物不得含有违禁品、危险品及赃物，否则用户应承担相应的法律责任。</p>
+</section>
+</body>
+</html>
