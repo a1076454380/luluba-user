@@ -48,11 +48,11 @@
 					<nav class="mynav">
 						<div class="meau_advater">
 							<a class="pic" href="web/advater/advater_list.html">
-								<img :src="userimg | muimg" v-show="userimg!=''">
-								<img src="images/driver_icon.png" v-show="userimg==''" />
+								<img :src="userimg | muimg" v-if="userimg!=''">
+								<img src="images/driver_icon.png" v-if="userimg==''" />
 							</a>
-							<a href="web/advater/advater_list.html" id="js_immedia_login" v-show="username!=''">{{username}}</a>
-							<a href="web/advater/advater_list.html" id="js_immedia_login" v-show="username==''">点击设置用户名</a>
+							<a href="web/advater/advater_list.html" id="js_immedia_login" v-if="username!=''">{{username}}</a>
+							<a href="web/advater/advater_list.html" id="js_immedia_login" v-if="username==''">点击设置用户名</a>
 						</div>
 						<ul class="meau_list">
 							<li>
