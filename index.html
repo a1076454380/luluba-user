@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -12,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
 		<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
-		
 	</head>
 	<style type="text/css">
 		#app {
@@ -37,7 +35,6 @@
 			left: -100%;
 		}
 	</style>
-
 	<body class="navslide_meau">
 		<!--侧栏菜单-->
 		<div id="app">
@@ -317,11 +314,10 @@
 					localStorage.removeItem('ytime')
 					localStorage.removeItem('carType')
 					var that = this
-					
 					if(localStorage.getItem('userid') == null) {
-											window.location.href = 'web/login.html';
-											return;
-										}
+						window.location.href = 'web/login.html';
+						return false;
+					}
 					//侧栏导航
 					$('[data-sidenav]').sidenav();
 					var that = this
@@ -365,18 +361,8 @@
 										plus.nativeUI.confirm("有新版本发布啦,是否立即下载??", function(e) {
 											if(e.index == 0) {
 												plus.runtime.openURL(res.data.versionAndroidUserUploadUrl)
-											} else {
-												if(localStorage.getItem('userid') == null) {
-													window.location.href = 'web/login.html';
-													return;
-												}
 											}
 										});
-									} else {
-										if(localStorage.getItem('userid') == null) {
-											window.location.href = 'web/login.html';
-											return;
-										}
 									}
 								}
 							})
@@ -452,7 +438,9 @@
 				},
 				filters: {
 					muimg: function(value) {
-						return localStorage.getItem('myurl') + value.substr(value.indexOf('/uploadImg'))
+						if(value!=''){
+							return localStorage.getItem('myurl') + value.substr(value.indexOf('/uploadImg'))
+						}
 					}
 				}
 			})
