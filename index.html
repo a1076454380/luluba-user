@@ -13,27 +13,10 @@
 		<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<style type="text/css">
-		#app {
-			width: 100%;
-			height: 100%;
-		}
-		
-		.js_tips a {
-			border-top: 2px solid #fe5722;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-		}
-		
-		.fade-enter-active,
-		.fade-leave-active {
-			left: 0;
-			transition: all .3s;
-		}
-		
-		.fade-enter,
-		.fade-leave-to {
-			left: -100%;
-		}
+		#app {width: 100%;height: 100%;}
+		.js_tips a {border-top: 2px solid #fe5722;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+		.fade-enter-active,.fade-leave-active {left: 0;transition: all .3s;}
+		.fade-enter,.fade-leave-to {left: -100%;}
 	</style>
 	<body class="navslide_meau">
 		<!--侧栏菜单-->
@@ -438,7 +421,7 @@
 				},
 				filters: {
 					muimg: function(value) {
-						if(value!=''){
+						if(value!=''&&value!=null){
 							return localStorage.getItem('myurl') + value.substr(value.indexOf('/uploadImg'))
 						}
 					}
