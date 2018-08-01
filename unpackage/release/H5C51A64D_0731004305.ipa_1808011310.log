@@ -1,0 +1,27 @@
+[2018-08-01 13:10:50 CST] <Thread-9>  INFO: Logging to file: C:\Users\Administrator\Desktop\luluba-user\unpackage\release\H5C51A64D_0731004305.ipa_1808011310.log
+[2018-08-01 13:10:50 CST] <Thread-9>  INFO: Logging configured successfully.
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: iTMSTransporter : iTunes Store Transporter [1.9.8]
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: OS identifier: Windows 8.1 6.3 (amd64); jvm=25.171-b11; jre=1.8.0_171-b11
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Memory: [JVM] 64M free, 123M total, 1796M max [System] (Physical) 4108M free, 8076M total (Swap) 3083M free, 8076M total
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Upload mode selected.
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Examining the package at: C:\Users\ADMINI~1\AppData\Local\Temp\au\itmsp\1415485389.itmsp
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Ensuring that package has well formed metadata file...
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Gathering the list of valid files from the package ...
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Finished gathering the list of valid files from the package.
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Verify progress: Analyzing metadata (Step 0/?)
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Performing authentication of package 1415485389.itmsp ...
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: Verify progress: Analyzing metadata (Step 1/2)
+[2018-08-01 13:10:51 CST] <Thread-9>  INFO: id = 20180801131051-706
+[2018-08-01 13:10:52 CST] <Thread-9>  INFO: id = 20180801131052-023
+[2018-08-01 13:10:54 CST] <Thread-9> ERROR: ERROR ITMS-4238: "Redundant Binary Upload. You’ve already uploaded a build with build number '225' for version number '9.0'. Make sure you increment the build string before you upload your app to iTunes Connect. Learn more in Xcode Help (http://help.apple.com/xcode/mac/current/#/devba7f53ad4)" at SoftwareAssets/PreReleaseSoftwareAsset
+[2018-08-01 13:10:54 CST] <Thread-9>  INFO: Verify progress: Operation failed (Step 2/2)
+
+
+
+Package Summary:
+ 
+1 package(s) were not uploaded because they had problems:
+	C:\Users\ADMINI~1\AppData\Local\Temp\au\itmsp\1415485389.itmsp - Error Messages:
+		ERROR ITMS-4238: "Redundant Binary Upload. You’ve already uploaded a build with build number '225' for version number '9.0'. Make sure you increment the build string before you upload your app to iTunes Connect. Learn more in Xcode Help (http://help.apple.com/xcode/mac/current/#/devba7f53ad4)" at SoftwareAssets/PreReleaseSoftwareAsset
+[2018-08-01 13:17:22 CST] <Thread-11> Invalid cookie header: "Set-Cookie: dqsid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJpUWJWRmNDZU5UUXc0QUQ5T3ZEbDNnIn0.iMVpdJUkaE6JKFM-JfusDg9haTWn-dQcjZQU9nFgRhc; Max-Age=1800; Expires=Wed, 01 Aug 2018 05:47:27 GMT; Path=/; Secure; HTTPOnly". Invalid 'expires' attribute: Wed, 01 Aug 2018 05:47:27 GMT
+[2018-08-01 13:17:22 CST] <Thread-11> list apps success
