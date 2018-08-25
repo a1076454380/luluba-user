@@ -328,34 +328,34 @@
 						});
 					})
 
-					var wgtVer = null;
+//					var wgtVer = null;
 					//					获取当前应用版本
-					function plusReady() {
-						plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-							wgtVer = inf.version;
-							$.ajax({
-								type: "get",
-								url: localStorage.getItem('myurl') + "/queryByversion",
-								dataType: 'json',
-								async: true,
-								success: function(res) {
-									if(res.data.versionUserCode != wgtVer) {
-										// 弹出提示信息对话框
-										plus.nativeUI.confirm("有新版本发布啦,是否立即下载??", function(e) {
-											if(e.index == 0) {
-												plus.runtime.openURL(res.data.versionAndroidUserUploadUrl)
-											}
-										});
-									}
-								}
-							})
-						});
-					}
-					if(window.plus) {
-						plusReady();
-					} else {
-						document.addEventListener('plusready', plusReady, false);
-					}
+//					function plusReady() {
+//						plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+//							wgtVer = inf.version;
+//							$.ajax({
+//								type: "get",
+//								url: localStorage.getItem('myurl') + "/queryByversion",
+//								dataType: 'json',
+//								async: true,
+//								success: function(res) {
+//									if(res.data.versionUserCode != wgtVer) {
+//										// 弹出提示信息对话框
+//										plus.nativeUI.confirm("有新版本发布啦,是否立即下载??", function(e) {
+//											if(e.index == 0) {
+//												plus.runtime.openURL(res.data.versionAndroidUserUploadUrl)
+//											}
+//										});
+//									}
+//								}
+//							})
+//						});
+//					}
+//					if(window.plus) {
+//						plusReady();
+//					} else {
+//						document.addEventListener('plusready', plusReady, false);
+//					}
 					
 					that.swip()
 					
